@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yoane & Marie-Aude — 08 Août 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Parisienne&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --papaya:      #EC7323;
+  --sunset:      #F5A91B;
+  --honeydew:    #EDCB8E;
+  --rosey:       #F49EBA;
+  --deep-blush:  #F26BA8;
+  --cream:       #faf3ee;
+  --cream2:      #f5ebe0;
+  --brown:       #3a1a0e;
+  --brown2:      #6b3020;
+  --border:      #f0a0b8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--brown);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:500;}
+.script{font-family:'Parisienne',cursive;}
+
+/* ── ENVELOPE ── */
+#env-screen{
+  position:fixed;inset:0;z-index:50;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  transition:opacity .9s ease,visibility .9s ease;
+}
+#env-screen.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.env-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg, #FDB6D7 0%, #F8A8CC 25%, #F5A91B 50%, #EC7323 75%, #E8885C 100%);
+}
+
+.ef{position:absolute;pointer-events:none;}
+.ef1{top:-30px;left:-30px;width:200px;opacity:.7;}
+.ef2{top:-20px;right:-20px;width:180px;opacity:.65;transform:scaleX(-1);}
+.ef3{bottom:-40px;left:10%;width:220px;opacity:.7;}
+.ef4{bottom:-30px;right:5%;width:190px;opacity:.65;}
+
+.env-wrap{
+  position:relative;width:min(360px,84vw);aspect-ratio:3/2;
+  cursor:pointer;z-index:2;perspective:1200px;
+}
+.env-back{
+  position:absolute;inset:0;border-radius:8px;
+  background:linear-gradient(165deg,#fff5f0,#ffe0e8);
+  box-shadow:0 28px 60px rgba(242,107,168,.35);
+  border:1.5px solid #F49EBA;
+}
+.env-letter{
+  position:absolute;left:8%;right:8%;top:11%;bottom:17%;
+  background:#fff9f5;border-radius:4px;
+  border:1px solid #F49EBA;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  transition:transform .9s cubic-bezier(.6,.05,.2,1);z-index:1;
+}
+.env-letter .ini{font-family:'Parisienne',cursive;font-size:2.2rem;color:var(--deep-blush);}
+.env-letter .sub{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--brown2);opacity:.7;}
+.env-flap{
+  position:absolute;top:0;left:0;right:0;height:55%;
+  clip-path:polygon(0 0,100% 0,50% 90%);
+  transform-origin:top center;
+  transition:transform .9s cubic-bezier(.6,.05,.2,1);z-index:3;
+  background:linear-gradient(160deg,#ffe8f0,#ffd0e0);
+  border-radius:8px 8px 0 0;border:1.5px solid #F49EBA;
+}
+.env-bottom{
+  position:absolute;bottom:0;left:0;right:0;height:60%;
+  background:linear-gradient(0deg,#ffd8e8,#ffe8f0);
+  clip-path:polygon(0 100%,0 28%,50% 68%,100% 28%,100% 100%);
+  z-index:2;border-radius:0 0 8px 8px;
+}
+.env-seal{
+  position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);
+  width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg, var(--rosey), var(--deep-blush) 70%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Parisienne',cursive;color:#fff;font-size:.95rem;
+  box-shadow:0 0 0 3px #fff5f0,0 0 0 5px var(--rosey),0 8px 20px rgba(242,107,168,.4);
+  z-index:4;transition:opacity .4s,transform .4s;
+}
+.env-wrap.opening .env-seal{opacity:0;transform:translate(-50%,-50%) scale(.3);}
+.env-wrap.opening .env-flap{transform:rotateX(172deg);}
+.env-wrap.opening .env-letter{transform:translateY(-82%) scale(1.05);}
+.env-hint{
+  position:absolute;bottom:-46px;left:50%;transform:translateX(-50%);
+  color:#fff;font-size:.7rem;letter-spacing:4px;text-transform:uppercase;
+  white-space:nowrap;text-shadow:0 1px 6px rgba(242,107,168,.5);
+  animation:pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+/* ── SITE ── */
+#site{display:none;}
+#site.visible{display:block;}
+
+.site-topbar{
+  position:fixed;top:0;left:0;right:0;z-index:30;
+  height:6px;
+  background:repeating-linear-gradient(90deg,
+    var(--papaya) 0 20px,
+    var(--sunset) 20px 40px,
+    var(--honeydew) 40px 60px,
+    var(--rosey) 60px 80px,
+    var(--deep-blush) 80px 100px,
+    var(--papaya) 100px 120px
+  );
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:80px 24px 60px;text-align:center;
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(245,169,27,.4) 0%,transparent 50%),
+    radial-gradient(ellipse at 85% 20%, rgba(242,107,168,.15) 0%,transparent 45%),
+    radial-gradient(ellipse at 50% 90%, rgba(236,115,35,.12) 0%,transparent 50%),
+    var(--cream);
+}
+
+.hero-fl{position:absolute;pointer-events:none;}
+.hero-fl1{top:-40px;left:-50px;width:260px;opacity:.75;transform:rotate(-15deg);}
+.hero-fl2{top:-20px;right:-40px;width:240px;opacity:.7;transform:rotate(10deg) scaleX(-1);}
+.hero-fl3{bottom:-50px;left:-30px;width:220px;opacity:.7;transform:rotate(10deg);}
+.hero-fl4{bottom:-40px;right:-40px;width:230px;opacity:.7;transform:rotate(-8deg) scaleX(-1);}
+.hero-sun{position:absolute;top:15%;right:8%;width:90px;opacity:.65;}
+.hero-fl5{top:30%;left:4%;width:80px;opacity:.5;transform:rotate(20deg);}
+.hero-fl6{top:25%;right:4%;width:70px;opacity:.5;transform:rotate(-15deg);}
+
+.hero-badge{
+  width:92px;height:92px;border-radius:50%;
+  background:linear-gradient(135deg, var(--rosey), var(--deep-blush) 70%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 5px var(--cream),0 0 0 7px var(--rosey),0 12px 30px rgba(242,107,168,.3);
+  margin-bottom:28px;
+  opacity:0;animation:rise .9s ease forwards .1s;
+}
+.hero-badge span{font-family:'Parisienne',cursive;color:#fff;font-size:1.5rem;}
+
+.hero-eyebrow{
+  font-size:.72rem;letter-spacing:5px;text-transform:uppercase;
+  color:var(--deep-blush);margin-bottom:14px;display:block;
+  opacity:0;animation:rise .9s ease forwards .25s;
+}
+.hero h1{
+  font-size:clamp(3rem,10vw,5.8rem);font-weight:500;
+  color:var(--brown);line-height:1;
+  opacity:0;animation:rise 1s ease forwards .4s;
+}
+.hero-amp-row{
+  display:flex;align-items:center;gap:16px;margin:8px 0;
+  opacity:0;animation:rise 1s ease forwards .55s;
+}
+.hero-amp-line{flex:1;height:1px;background:var(--rosey);max-width:100px;}
+.hero-amp{font-family:'Parisienne',cursive;color:var(--rosey);font-size:clamp(2rem,6vw,3.5rem);}
+
+.hero-date{
+  margin-top:28px;
+  background:linear-gradient(135deg, var(--deep-blush), var(--papaya));
+  color:#fff;
+  padding:13px 32px;
+  font-size:.8rem;letter-spacing:3px;text-transform:uppercase;
+  box-shadow:0 6px 20px rgba(242,107,168,.35);
+  opacity:0;animation:rise .9s ease forwards .7s;
+}
+.hero-families{
+  margin-top:16px;font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1.15rem;color:var(--brown2);
+  opacity:0;animation:rise .9s ease forwards .85s;
+}
+.hero-families b{font-style:normal;color:var(--deep-blush);font-weight:600;}
+
+.scroll-cue{
+  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  font-size:.62rem;letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--rosey);opacity:.7;animation:bob 2.5s ease-in-out infinite;
+}
+@keyframes rise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,9px);}}
+
+/* ── BANDE FLORALE SÉPARATEUR ── */
+.floral-band{
+  width:100%;overflow:hidden;line-height:0;
+  background:var(--cream2);
+  display:flex;align-items:center;justify-content:center;
+  padding:18px 0;gap:0;
+  font-size:1.4rem;letter-spacing:4px;
+  color:var(--deep-blush);
+  user-select:none;
+}
+
+/* ── COUNTDOWN ── */
+.countdown-sec{
+  background:
+    radial-gradient(ellipse at 10% 50%, rgba(245,169,27,.4) 0%,transparent 55%),
+    radial-gradient(ellipse at 90% 50%, rgba(242,107,168,.12) 0%,transparent 55%),
+    var(--cream2);
+  padding:70px 24px;text-align:center;position:relative;overflow:hidden;
+}
+.cd-sun{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:110px;opacity:.4;}
+.cd-sun2{position:absolute;left:3%;top:50%;transform:translateY(-50%);width:90px;opacity:.3;}
+.cd-eyebrow{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--rosey);display:block;margin-bottom:10px;}
+.cd-title{font-size:clamp(1.8rem,4vw,2.8rem);color:var(--brown);margin-bottom:38px;}
+.countdown{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.cd-block{
+  width:100px;padding:22px 8px;
+  background:#fff;
+  border:1.5px solid var(--rosey);
+  border-radius:4px;
+  box-shadow:0 4px 16px rgba(242,107,168,.1);
+  position:relative;overflow:hidden;
+}
+.cd-block::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--deep-blush),var(--papaya),var(--sunset));
+}
+.cd-num{font-family:'Cormorant Garamond',serif;font-size:2.7rem;color:var(--deep-blush);display:block;}
+.cd-lbl{font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--brown2);opacity:.6;}
+
+/* ── SECTION GÉNÉRIQUE ── */
+.sec{padding:80px 24px;max-width:860px;margin:0 auto;text-align:center;}
+.sec-alt{background:var(--cream2);}
+.sec-alt .sec{margin:0 auto;}
+
+.sec-eyebrow{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--rosey);display:block;margin-bottom:10px;}
+.sec-title{font-size:clamp(2rem,4.5vw,3rem);color:var(--brown);margin-bottom:0;}
+
+.ornement{display:flex;align-items:center;gap:12px;margin:34px auto;max-width:360px;}
+.ornement .ol{flex:1;height:1px;background:var(--rosey);}
+.ornement .oc{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  border:1.5px solid var(--rosey);border-radius:50%;color:var(--deep-blush);font-size:.75rem;}
+
+/* histoire */
+.story{max-width:620px;margin:0 auto;text-align:center;}
+.story p{font-size:1rem;line-height:1.95;color:var(--brown2);}
+.story p+p{margin-top:16px;}
+.story blockquote{
+  margin:30px auto;border-left:3px solid var(--rosey);padding:10px 0 10px 22px;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.35rem;color:var(--deep-blush);line-height:1.55;
+  max-width:500px;text-align:left;
+}
+.story blockquote cite{
+  display:block;margin-top:8px;font-size:.7rem;
+  letter-spacing:2px;text-transform:uppercase;color:var(--rosey);font-style:normal;
+}
+
+/* ── GALERIE ── */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:44px;}
+.photo{aspect-ratio:3/4;border:1.5px solid var(--rosey);border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;}
+.photo:nth-child(odd){background:linear-gradient(160deg,#fde8f0,#fce0d8);}
+.photo:nth-child(even){background:linear-gradient(160deg,#fde0d0,#fce8e0);}
+.photo span{position:absolute;bottom:10px;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--rosey);opacity:.7;}
+.photo svg{width:44px;opacity:.2;}
+
+/* ── INFOS ── */
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:44px;text-align:left;}
+.info-card{
+  background:#fff;border:1.5px solid var(--rosey);border-radius:6px;
+  padding:26px 22px;position:relative;overflow:hidden;
+  box-shadow:0 4px 16px rgba(242,107,168,.07);
+}
+.info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.info-card:nth-child(1)::before{background:linear-gradient(90deg,var(--deep-blush),var(--rosey));}
+.info-card:nth-child(2)::before{background:linear-gradient(90deg,var(--rosey),var(--honeydew));}
+.info-card:nth-child(3)::before{background:linear-gradient(90deg,var(--papaya),var(--sunset));}
+.info-card h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--deep-blush);margin-bottom:10px;margin-top:4px;}
+.info-card p{font-size:.9rem;line-height:1.75;color:var(--brown2);}
+.info-card a.lien{display:inline-block;margin-top:8px;font-size:.8rem;color:var(--deep-blush);text-decoration:underline;text-underline-offset:3px;}
+
+/* dress-code swatches */
+.swatches{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+.sw{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.sw .dot{width:32px;height:32px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.12);}
+.sw span{font-size:.58rem;letter-spacing:.4px;color:var(--brown2);text-align:center;line-height:1.3;}
+
+/* ── LOCALISATION ── */
+.location-wrap{
+  background:var(--cream2);
+  padding:80px 24px;text-align:center;position:relative;overflow:hidden;
+}
+.location-fl1{position:absolute;bottom:-30px;left:-20px;width:200px;opacity:.55;transform:rotate(10deg);}
+.location-fl2{position:absolute;top:-30px;right:-20px;width:180px;opacity:.5;transform:rotate(-10deg) scaleX(-1);}
+.location-inner{max-width:860px;margin:0 auto;position:relative;z-index:1;}
+.map-container{
+  margin:38px auto 0;
+  border:1.5px solid var(--rosey);border-radius:8px;overflow:hidden;
+  box-shadow:0 12px 32px rgba(242,107,168,.12);
+  position:relative;
+  max-width:100%;
+}
+.map-container::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;z-index:2;
+  background:linear-gradient(90deg,var(--sunset),var(--papaya),var(--deep-blush));
+}
+.map-container iframe{width:100%;height:400px;border:none;display:block;}
+.location-info{
+  background:#fff;border:1.5px solid var(--rosey);border-radius:6px;
+  padding:28px 22px;margin-top:28px;text-align:left;
+  box-shadow:0 4px 16px rgba(242,107,168,.07);
+  position:relative;overflow:hidden;
+}
+.location-info::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.location-info h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--deep-blush);margin-bottom:12px;}
+.location-info p{font-size:.95rem;color:var(--brown2);line-height:1.8;margin:8px 0;}
+.location-info strong{color:var(--brown);}
+
+/* ── RSVP ── */
+.rsvp-wrap{
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(245,169,27,.5) 0%,transparent 50%),
+    radial-gradient(ellipse at 85% 100%, rgba(242,107,168,.15) 0%,transparent 50%),
+    var(--cream);
+  padding:80px 24px;text-align:center;position:relative;overflow:hidden;
+}
+.rsvp-fl1{position:absolute;bottom:-30px;left:-20px;width:200px;opacity:.55;transform:rotate(10deg);}
+.rsvp-fl2{position:absolute;top:-30px;right:-20px;width:180px;opacity:.5;transform:rotate(-10deg) scaleX(-1);}
+.rsvp-inner{max-width:600px;margin:0 auto;position:relative;z-index:1;}
+.rsvp-frame{
+  margin:38px auto 0;
+  border:1.5px solid var(--rosey);border-radius:8px;overflow:hidden;
+  box-shadow:0 16px 40px rgba(242,107,168,.15);
+  position:relative;
+}
+.rsvp-frame::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;z-index:2;
+  background:linear-gradient(90deg,var(--deep-blush),var(--papaya),var(--sunset),var(--rosey));
+}
+.rsvp-frame iframe{width:100%;height:580px;border:none;display:block;background:#fff;}
+.rsvp-note{margin-top:12px;font-size:.75rem;color:var(--brown2);opacity:.6;}
+.rsvp-note a{color:var(--deep-blush);}
+
+/* ── FOOTER ── */
+footer{
+  background:linear-gradient(135deg, var(--deep-blush), var(--papaya));
+  color:#fff;
+  text-align:center;padding:56px 24px 70px;position:relative;overflow:hidden;
+}
+.footer-fl{position:absolute;pointer-events:none;opacity:.2;}
+.footer-fl1{bottom:-20px;left:-20px;width:180px;}
+.footer-fl2{top:-20px;right:-20px;width:160px;transform:scaleX(-1);}
+.footer-inner{position:relative;z-index:1;}
+footer .script{font-size:2.2rem;display:block;margin-bottom:8px;color:#fff;}
+footer p{font-size:.8rem;letter-spacing:1.5px;opacity:.85;margin-top:4px;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:680px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .infos-grid{grid-template-columns:1fr;}
+  .hero-fl1,.hero-fl2,.hero-fl3,.hero-fl4{width:160px;}
+  .map-container iframe{height:300px;}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── FLEURS SVG réutilisables ── -->
+<svg style="display:none">
+  <defs>
+    <g id="hibiscus">
+      <ellipse cx="50" cy="28" rx="18" ry="30" fill="#F26BA8" opacity=".85" transform="rotate(0,50,60)"/>
+      <ellipse cx="50" cy="28" rx="18" ry="30" fill="#F49EBA" opacity=".8" transform="rotate(72,50,60)"/>
+      <ellipse cx="50" cy="28" rx="18" ry="30" fill="#E8509A" opacity=".82" transform="rotate(144,50,60)"/>
+      <ellipse cx="50" cy="28" rx="18" ry="30" fill="#F26BA8" opacity=".8" transform="rotate(216,50,60)"/>
+      <ellipse cx="50" cy="28" rx="18" ry="30" fill="#F49EBA" opacity=".82" transform="rotate(288,50,60)"/>
+      <circle cx="50" cy="60" r="8" fill="#F5A91B"/>
+      <line x1="50" y1="60" x2="50" y2="80" stroke="#E07090" stroke-width="2"/>
+    </g>
+    <g id="fleur-orange">
+      <ellipse cx="50" cy="28" rx="16" ry="28" fill="#EC7323" opacity=".85" transform="rotate(0,50,58)"/>
+      <ellipse cx="50" cy="28" rx="16" ry="28" fill="#F5A91B" opacity=".8" transform="rotate(72,50,58)"/>
+      <ellipse cx="50" cy="28" rx="16" ry="28" fill="#E8885C" opacity=".82" transform="rotate(144,50,58)"/>
+      <ellipse cx="50" cy="28" rx="16" ry="28" fill="#F5A91B" opacity=".8" transform="rotate(216,50,58)"/>
+      <ellipse cx="50" cy="28" rx="16" ry="28" fill="#EC7323" opacity=".82" transform="rotate(288,50,58)"/>
+      <circle cx="50" cy="58" r="7" fill="#EDCB8E"/>
+    </g>
+    <g id="soleil">
+      <circle cx="50" cy="50" r="22" fill="#F5A91B" opacity=".9"/>
+      <circle cx="50" cy="50" r="16" fill="#EDCB8E" opacity=".8"/>
+      <g stroke="#EC7323" stroke-width="3" stroke-linecap="round" opacity=".7">
+        <line x1="50" y1="5" x2="50" y2="18"/>
+        <line x1="50" y1="82" x2="50" y2="95"/>
+        <line x1="5" y1="50" x2="18" y2="50"/>
+        <line x1="82" y1="50" x2="95" y2="50"/>
+        <line x1="17" y1="17" x2="27" y2="27"/>
+        <line x1="73" y1="73" x2="83" y2="83"/>
+        <line x1="17" y1="83" x2="27" y2="73"/>
+        <line x1="73" y1="27" x2="83" y2="17"/>
+      </g>
+    </g>
+    <g id="frangipane">
+      <ellipse cx="50" cy="26" rx="14" ry="28" fill="#EDCB8E" opacity=".9" transform="rotate(0,50,55)"/>
+      <ellipse cx="50" cy="26" rx="14" ry="28" fill="#F5A91B" opacity=".85" transform="rotate(72,50,55)"/>
+      <ellipse cx="50" cy="26" rx="14" ry="28" fill="#FDB6D7" opacity=".88" transform="rotate(144,50,55)"/>
+      <ellipse cx="50" cy="26" rx="14" ry="28" fill="#EDCB8E" opacity=".85" transform="rotate(216,50,55)"/>
+      <ellipse cx="50" cy="26" rx="14" ry="28" fill="#F5A91B" opacity=".88" transform="rotate(288,50,55)"/>
+      <circle cx="50" cy="55" r="8" fill="#EC7323"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- ─────────── ENVELOPE ─────────── -->
+<div id="env-screen">
+  <div class="env-bg"></div>
+  <svg class="ef ef1" viewBox="0 0 100 120"><use href="#hibiscus"/></svg>
+  <svg class="ef ef2" viewBox="0 0 100 120"><use href="#hibiscus"/></svg>
+  <svg class="ef ef3" viewBox="0 0 100 120"><use href="#frangipane"/></svg>
+  <svg class="ef ef4" viewBox="0 0 100 120"><use href="#fleur-orange"/></svg>
+
+  <div class="env-wrap" id="envWrap" role="button" tabindex="0" aria-label="Ouvrir l'invitation">
+    <div class="env-back"></div>
+    <div class="env-letter">
+      <span class="ini script">Y &amp; MA</span>
+      <span class="sub">Vous êtes invités</span>
+    </div>
+    <div class="env-bottom"></div>
+    <div class="env-flap"></div>
+    <div class="env-seal">Y&amp;MA</div>
+    <span class="env-hint">Touchez pour ouvrir</span>
+  </div>
+</div>
+
+<!-- ─────────── SITE ─────────── -->
+<div id="site">
+
+<div class="site-topbar"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-fl hero-fl1" viewBox="0 0 100 120"><use href="#hibiscus"/></svg>
+  <svg class="hero-fl hero-fl2" viewBox="0 0 100 120"><use href="#fleur-orange"/></svg>
+  <svg class="hero-fl hero-fl3" viewBox="0 0 100 120"><use href="#frangipane"/></svg>
+  <svg class="hero-fl hero-fl4" viewBox="0 0 100 120"><use href="#hibiscus"/></svg>
+  <svg class="hero-fl hero-sun" viewBox="0 0 100 100"><use href="#soleil"/></svg>
+  <svg class="hero-fl hero-fl5" viewBox="0 0 100 120"><use href="#frangipane"/></svg>
+  <svg class="hero-fl hero-fl6" viewBox="0 0 100 120"><use href="#fleur-orange"/></svg>
+
+  <div class="hero-badge"><span>Y&MA</span></div>
+  <span class="hero-eyebrow">Mariage Traditionnel</span>
+  <h1>Yoane<span class="hero-amp-row"><span class="hero-amp-line"></span><span class="hero-amp">&amp;</span><span class="hero-amp-line"></span></span>Marie-Aude</h1>
+  <div class="hero-date">08 Août 2026 · 12h00 · Menara Garden, Yopougon</div>
+  <p class="hero-families">Familles <b>KONANDRI</b> &amp; <b>KOUAME</b></p>
+  <span class="scroll-cue">Défiler ↓</span>
+</section>
+
+<!-- SÉPARATEUR FLORAL -->
+<div class="floral-band">
+  🌺 &nbsp;✦&nbsp; 🌸 &nbsp;✦&nbsp; 🌺 &nbsp;✦&nbsp; 🌸 &nbsp;✦&nbsp; 🌺 &nbsp;✦&nbsp; 🌸 &nbsp;✦&nbsp; 🌺 &nbsp;✦&nbsp; 🌸
+</div>
+
+<!-- COUNTDOWN -->
+<div class="countdown-sec">
+  <svg class="cd-sun" viewBox="0 0 100 100"><use href="#soleil"/></svg>
+  <svg class="cd-sun2" viewBox="0 0 100 100"><use href="#soleil"/></svg>
+  <span class="cd-eyebrow">Le grand jour approche</span>
+  <h2 class="cd-title">Compte à rebours</h2>
+  <div class="countdown" id="countdown">
+    <div class="cd-block"><span class="cd-num" id="cd-d">--</span><span class="cd-lbl">jours</span></div>
+    <div class="cd-block"><span class="cd-num" id="cd-h">--</span><span class="cd-lbl">heures</span></div>
+    <div class="cd-block"><span class="cd-num" id="cd-m">--</span><span class="cd-lbl">minutes</span></div>
+    <div class="cd-block"><span class="cd-num" id="cd-s">--</span><span class="cd-lbl">secondes</span></div>
+  </div>
+</div>
+
+<!-- SÉPARATEUR FLORAL -->
+<div class="floral-band">
+  🧡 &nbsp;✦&nbsp; 🌼 &nbsp;✦&nbsp; 🧡 &nbsp;✦&nbsp; 🌼 &nbsp;✦&nbsp; 🧡 &nbsp;✦&nbsp; 🌼 &nbsp;✦&nbsp; 🧡 &nbsp;✦&nbsp; 🌼
+</div>
+
+<!-- NOTRE HISTOIRE ● SIMPLE & ÉLÉGANTE -->
+<div class="sec-alt">
+<div class="sec">
+  <span class="sec-eyebrow">Notre Histoire</span>
+  <h2 class="sec-title">Yoane & Marie-Aude</h2>
+
+  <div class="ornement">
+    <span class="ol"></span>
+    <span class="oc">✦</span>
+    <span class="ol"></span>
+  </div>
+
+  <div class="story">
+    <p>Les familles <strong>KONANDRI</strong> et <strong>KOUAME</strong> sont honorées de vous convier à la célébration de l'amour et de l'union de leurs enfants, Yoane et Marie-Aude.</p>
+    
+    <blockquote>
+      « Mon bien-aimé est à moi, et je suis à lui. »
+      <cite>Cantique des Cantiques 2:16</cite>
+    </blockquote>
+
+    <p>C'est avec un cœur rempli de joie que nous partageons ce moment sacré avec vous. Yoane et Marie-Aude s'unissent dans la foi et le respect des traditions, prêts à bâtir ensemble une vie nouvelle, forte de l'amour de leurs familles et de votre présence.</p>
+  </div>
+</div>
+</div>
+
+<!-- SÉPARATEUR FLORAL -->
+<div class="floral-band">
+  🌺 &nbsp;✦&nbsp; 🌸 &nbsp;✦&nbsp; 🌺 &nbsp;✦&nbsp; 🌸 &nbsp;✦&nbsp; 🌺 &nbsp;✦&nbsp; 🌸 &nbsp;✦&nbsp; 🌺 &nbsp;✦&nbsp; 🌸
+</div>
+
+<!-- GALERIE -->
+<div class="sec">
+  <span class="sec-eyebrow">En images</span>
+  <h2 class="sec-title">Quelques souvenirs</h2>
+  <div class="gallery-grid">
+    <div class="photo">
+      <svg viewBox="0 0 100 120"><use href="#hibiscus"/></svg>
+      <span>Photo à ajouter</span>
+    </div>
+    <div class="photo">
+      <svg viewBox="0 0 100 120"><use href="#frangipane"/></svg>
+      <span>Photo à ajouter</span>
+    </div>
+    <div class="photo">
+      <svg viewBox="0 0 100 120"><use href="#fleur-orange"/></svg>
+      <span>Photo à ajouter</span>
+    </div>
+    <div class="photo">
+      <svg viewBox="0 0 100 120"><use href="#frangipane"/></svg>
+      <span>Photo à ajouter</span>
+    </div>
+    <div class="photo">
+      <svg viewBox="0 0 100 120"><use href="#hibiscus"/></svg>
+      <span>Photo à ajouter</span>
+    </div>
+    <div class="photo">
+      <svg viewBox="0 0 100 120"><use href="#fleur-orange"/></svg>
+      <span>Photo à ajouter</span>
+    </div>
+  </div>
+</div>
+
+<!-- SÉPARATEUR FLORAL -->
+<div class="floral-band">
+  🧡 &nbsp;✦&nbsp; 🌼 &nbsp;✦&nbsp; 🧡 &nbsp;✦&nbsp; 🌼 &nbsp;✦&nbsp; 🧡 &nbsp;✦&nbsp; 🌼 &nbsp;✦&nbsp; 🧡 &nbsp;✦&nbsp; 🌼
+</div>
+
+<!-- INFOS PRATIQUES -->
+<div class="sec-alt">
+<div class="sec">
+  <span class="sec-eyebrow">À prévoir</span>
+  <h2 class="sec-title">Infos pratiques</h2>
+  <div class="infos-grid">
+
+    <div class="info-card">
+      <h3>📍 Lieu</h3>
+      <p>Menara Garden<br>Yopougon, Abidjan<br>Côte d'Ivoire</p>
+      <a class="lien" href="https://maps.google.com/maps/search/Menara+Garden+Yopougon" target="_blank" rel="noopener">Voir sur la carte →</a>
+    </div>
+
+    <div class="info-card">
+      <h3>🕛 Horaire</h3>
+      <p>La cérémonie débute à <strong>12h00 précises</strong>. Merci d'arriver 15 à 20 minutes à l'avance pour être bien installés.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>👗 Dress Code</h3>
+      <p>Thème <em>coucher de soleil tropical</em> — tenues colorées et festives bienvenues !</p>
+      <div class="swatches">
+        <div class="sw"><span class="dot" style="background:#EC7323;"></span><span>Papaya</span></div>
+        <div class="sw"><span class="dot" style="background:#F5A91B;"></span><span>Sunset</span></div>
+        <div class="sw"><span class="dot" style="background:#EDCB8E;"></span><span>Honeydew</span></div>
+        <div class="sw"><span class="dot" style="background:#F49EBA;"></span><span>Rosey</span></div>
+        <div class="sw"><span class="dot" style="background:#F26BA8;"></span><span>Deep Blush</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- SÉPARATEUR FLORAL -->
+<div class="floral-band">
+  🌺 &nbsp;✦&nbsp; 🌸 &nbsp;✦&nbsp; 🌺 &nbsp;✦&nbsp; 🌸 &nbsp;✦&nbsp; 🌺 &nbsp;✦&nbsp; 🌸 &nbsp;✦&nbsp; 🌺 &nbsp;✦&nbsp; 🌸
+</div>
+
+<!-- LOCALISATION -->
+<div class="location-wrap">
+  <svg class="location-fl1" viewBox="0 0 100 120"><use href="#frangipane"/></svg>
+  <svg class="location-fl2" viewBox="0 0 100 120"><use href="#hibiscus"/></svg>
+  <div class="location-inner">
+    <span class="sec-eyebrow">Trouvez-nous</span>
+    <h2 class="sec-title">Notre Lieu de Mariage</h2>
+    
+    <div class="location-info">
+      <h3>📍 Menara Garden, Yopougon</h3>
+      <p><strong>Date :</strong> 8 Août 2026</p>
+      <p><strong>Heure :</strong> 12h00</p>
+      <p><strong>Adresse :</strong> Menara Garden, Yopougon, Abidjan, Côte d'Ivoire</p>
+    </div>
+
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3973.2024531456656!2d-4.0301!3d5.3079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec534e6f7f7f7f7f%3A0x1234567890abcdef!2sYopougon%2C%20Abidjan!5e0!3m2!1sfr!2sci!4v1700000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- SÉPARATEUR FLORAL -->
+<div class="floral-band">
+  🧡 &nbsp;✦&nbsp; 🌼 &nbsp;✦&nbsp; 🧡 &nbsp;✦&nbsp; 🌼 &nbsp;✦&nbsp; 🧡 &nbsp;✦&nbsp; 🌼 &nbsp;✦&nbsp; 🧡 &nbsp;✦&nbsp; 🌼
+</div>
+
+<!-- RSVP -->
+<div class="rsvp-wrap">
+  <svg class="rsvp-fl1" viewBox="0 0 100 120"><use href="#frangipane"/></svg>
+  <svg class="rsvp-fl2" viewBox="0 0 100 120"><use href="#hibiscus"/></svg>
+  <div class="rsvp-inner">
+    <span class="sec-eyebrow">Avant le 20 Juillet 2026</span>
+    <h2 class="sec-title">Confirmez votre présence</h2>
+    <p style="margin-top:12px;font-size:.95rem;color:var(--brown2);opacity:.8;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7;">
+      Merci de remplir le formulaire ci-dessous. Vous pourrez indiquer si vous venez accompagné(e) et renseigner le nom de votre accompagnateur.
+    </p>
+    <div class="rsvp-frame">
+      <iframe src="https://form.typeform.com/to/VxHfdICC" title="Confirmation de présence" loading="lazy" allow="camera; microphone; autoplay; encrypted-media;"></iframe>
+    </div>
+    <p class="rsvp-note">Le formulaire ne s'affiche pas ? <a href="https://form.typeform.com/to/VxHfdICC" target="_blank" rel="noopener">Ouvrez-le dans un nouvel onglet →</a></p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <svg class="footer-fl footer-fl1" viewBox="0 0 100 120"><use href="#hibiscus"/></svg>
+  <svg class="footer-fl footer-fl2" viewBox="0 0 100 120"><use href="#frangipane"/></svg>
+  <div class="footer-inner">
+    <span class="script">Yoane &amp; Marie-Aude</span>
+    <p>08 Août 2026 · Menara Garden, Yopougon</p>
+    <p>Familles KONANDRI &amp; KOUAME</p>
+  </div>
+</footer>
+
+</div><!-- /site -->
+
+<script>
+// ENVELOPE
+const envWrap = document.getElementById('envWrap');
+const envScreen = document.getElementById('env-screen');
+const site = document.getElementById('site');
+function open_env(){
+  if(envWrap.classList.contains('opening')) return;
+  envWrap.classList.add('opening');
+  site.classList.add('visible');
+  setTimeout(()=>{envScreen.classList.add('hidden');document.body.style.overflow='auto';},960);
+}
+envWrap.addEventListener('click',open_env);
+envWrap.addEventListener('keypress',e=>{if(e.key==='Enter'||e.key===' ')open_env();});
+document.body.style.overflow='hidden';
+
+// COUNTDOWN
+const TARGET=new Date('2026-08-08T12:00:00').getTime();
+function tick(){
+  const d=TARGET-Date.now();
+  if(d<0){document.getElementById('countdown').innerHTML="<p style='font-family:Cormorant Garamond,serif;font-size:1.5rem;color:var(--deep-blush);'>C'est aujourd'hui ! 🌺</p>";return;}
+  document.getElementById('cd-d').textContent=Math.floor(d/86400000);
+  document.getElementById('cd-h').textContent=String(Math.floor(d%86400000/3600000)).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(Math.floor(d%3600000/60000)).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(Math.floor(d%60000/1000)).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
