@@ -326,7 +326,8 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:500;}
   content:'';position:absolute;top:0;left:0;right:0;height:4px;z-index:2;
   background:linear-gradient(90deg,var(--deep-blush),var(--papaya),var(--sunset),var(--rosey));
 }
-.rsvp-frame iframe{width:100%;height:580px;border:none;display:block;background:#fff;}
+/* responsive iframe for Google Forms */
+.rsvp-frame iframe{width:100%;height:min(780px,70vh);max-height:90vh;border:none;display:block;background:#fff;}
 
 /* ── FOOTER ── */
 footer{
@@ -495,7 +496,7 @@ footer p{font-size:.8rem;letter-spacing:1.5px;opacity:.85;margin-top:4px;}
 
 <!-- SÉPARATEUR ÉLÉGANT -->
 <div class="divider-section">
-  <div class="divider-symbol">✦ ���� ✦</div>
+  <div class="divider-symbol">✦ 🌺 ✦</div>
 </div>
 
 <!-- GALERIE -->
@@ -568,7 +569,7 @@ footer p{font-size:.8rem;letter-spacing:1.5px;opacity:.85;margin-top:4px;}
 
 <!-- SÉPARATEUR ÉLÉGANT -->
 <div class="divider-section">
-  <div class="divider-symbol">✦ ���� ✦</div>
+  <div class="divider-symbol">✦ 🌺 ✦</div>
 </div>
 
 <!-- RSVP -->
@@ -582,7 +583,8 @@ footer p{font-size:.8rem;letter-spacing:1.5px;opacity:.85;margin-top:4px;}
       Remplissez le formulaire ci-dessous pour confirmer votre présence.
     </p>
     <div class="rsvp-frame">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf2JX7zu4OBu2jUDtHExintSrhjOr1EHU_C4aLAJ-2asUnTyA/viewform?embedded=true" title="Confirmation de présence" loading="lazy" allow="camera; microphone; autoplay; encrypted-media;"></iframe>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf2JX7zu4OBu2jUDtHExintSrhjOr1EHU_C4aLAJ-2asUnTyA/viewform?embedded=true" title="Confirmation de présence" loading="lazy" allow="camera; microphone; autoplay; encrypted-media;" allowfullscreen></iframe>
+      <p style="margin:12px;text-align:center;font-size:.95rem;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSf2JX7zu4OBu2jUDtHExintSrhjOr1EHU_C4aLAJ-2asUnTyA/viewform" target="_blank" rel="noopener">Ouvrir le formulaire dans un nouvel onglet</a></p>
     </div>
   </div>
 </div>
