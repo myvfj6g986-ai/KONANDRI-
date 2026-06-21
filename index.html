@@ -275,11 +275,12 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:500;}
 
 /* ── GALERIE ── */
 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:44px;}
-.photo{aspect-ratio:3/4;border:1.5px solid var(--rosey);border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;}
-.photo:nth-child(odd){background:linear-gradient(160deg,#fde8f0,#fce0d8);}
-.photo:nth-child(even){background:linear-gradient(160deg,#fde0d0,#fce8e0);}
-.photo span{position:absolute;bottom:10px;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--rosey);opacity:.7;}
-.photo svg{width:44px;opacity:.2;}
+.photo{aspect-ratio:3/4;border:1.5px solid var(--rosey);border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;}
+.photo img{width:100%;height:100%;object-fit:cover;}
+.photo.placeholder{background:linear-gradient(160deg,#fde8f0,#fce0d8);}
+.photo.placeholder:nth-child(even){background:linear-gradient(160deg,#fde0d0,#fce8e0);}
+.photo.placeholder svg{width:44px;opacity:.2;}
+.photo.placeholder span{position:absolute;bottom:10px;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--rosey);opacity:.7;}
 
 /* ── INFOS ── */
 .infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:44px;text-align:left;}
@@ -522,26 +523,23 @@ footer p{font-size:.8rem;letter-spacing:1.5px;opacity:.85;margin-top:4px;}
   <h2 class="sec-title">Quelques souvenirs</h2>
   <div class="gallery-grid">
     <div class="photo">
-      <svg viewBox="0 0 100 120"><use href="#hibiscus"/></svg>
-      <span>Photo à ajouter</span>
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=500&fit=crop" alt="Yoane et Marie-Aude">
     </div>
     <div class="photo">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=500&fit=crop" alt="Couple">
+    </div>
+    <div class="photo">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=500&fit=crop" alt="Moments">
+    </div>
+    <div class="photo placeholder">
       <svg viewBox="0 0 100 120"><use href="#frangipane"/></svg>
       <span>Photo à ajouter</span>
     </div>
-    <div class="photo">
-      <svg viewBox="0 0 100 120"><use href="#fleur-orange"/></svg>
-      <span>Photo à ajouter</span>
-    </div>
-    <div class="photo">
-      <svg viewBox="0 0 100 120"><use href="#frangipane"/></svg>
-      <span>Photo à ajouter</span>
-    </div>
-    <div class="photo">
+    <div class="photo placeholder">
       <svg viewBox="0 0 100 120"><use href="#hibiscus"/></svg>
       <span>Photo à ajouter</span>
     </div>
-    <div class="photo">
+    <div class="photo placeholder">
       <svg viewBox="0 0 100 120"><use href="#fleur-orange"/></svg>
       <span>Photo à ajouter</span>
     </div>
@@ -563,7 +561,7 @@ footer p{font-size:.8rem;letter-spacing:1.5px;opacity:.85;margin-top:4px;}
     <div class="info-card">
       <h3>📍 Lieu</h3>
       <p>Menara Garden<br>Yopougon, Abidjan<br>Côte d'Ivoire</p>
-      <a class="lien" href="https://www.google.com/maps/search/Menara+Garden+Yopougon+Abidjan+Cote+d'Ivoire" target="_blank" rel="noopener">Voir sur Google Maps →</a>
+      <a class="lien" href="https://maps.app.goo.gl/HYW8b1wSTGwsT8Yu9" target="_blank" rel="noopener">Voir sur Google Maps →</a>
     </div>
 
     <div class="info-card">
@@ -601,7 +599,7 @@ footer p{font-size:.8rem;letter-spacing:1.5px;opacity:.85;margin-top:4px;}
     <h2 class="sec-title">Notre Lieu de Mariage</h2>
 
     <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3973.2024531456656!2d-4.0301!3d5.3079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec534e6f7f7f7f7f%3A0x1234567890abcdef!2sMenara%20Garden%2C%20Yopougon%2C%20Abidjan!5e0!3m2!1sfr!2sci!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte Google Maps - Menara Garden Yopougon"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3973.202!2d-4.030!3d5.308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec534f5f7f7f7f7f%3A0x1234567890abcdef!2sMenara%20Garden%2C%20Yopougon%2C%20Abidjan%2C%20C%C3%B4te%20d'Ivoire!5e0!3m2!1sfr!2sci!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte Google Maps - Menara Garden Yopougon"></iframe>
     </div>
   </div>
 </div>
