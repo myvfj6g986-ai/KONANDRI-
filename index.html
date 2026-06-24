@@ -88,7 +88,7 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:500;}
 @keyframes rise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 
 /* ── DIVIDER ── */
-.divider-section{padding:56px 24px;background:var(--cream2);display:flex;align-items:center;justify-content:center;gap:20px;position:relative;overflow:hidden}
+.divider-section{Padding:56px 24px;background:var(--cream2);display:flex;align-items:center;justify-content:center;gap:20px;position:relative;overflow:hidden}
 .divider-section::before,.divider-section::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,transparent,var(--rosey),transparent)}
 .divider-symbol{font-size:1.8rem;letter-spacing:8px;color:var(--deep-blush);opacity:.6;user-select:none;display:flex;gap:8px}
 
@@ -328,27 +328,44 @@ footer p{font-size:.9rem;letter-spacing:1.5px;opacity:.95;margin-top:4px}
   <div class="gallery-grid" id="ts-gallery">
     <!-- 6 images prévues ; si certaines images manquent, les placeholders restent visibles -->
     <a href="DSC03430.jpg" class="grid-item" data-glightbox="title:Yoane et Marie-Aude" aria-label="Ouvrir l'image 1">
-      <img src="DSC03430.jpg" alt="Yoane et Marie-Aude sur la plage au coucher du soleil" loading="lazy">
+      <picture>
+        <source type="image/webp" srcset="DSC03430-400.webp 400w, DSC03430-800.webp 800w, DSC03430-1600.webp 1600w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw">
+        <source type="image/jpeg" srcset="DSC03430-400.jpg 400w, DSC03430-800.jpg 800w, DSC03430-1600.jpg 1600w">
+        <img src="DSC03430.jpg" alt="Yoane et Marie-Aude sur la plage au coucher du soleil" loading="lazy">
+      </picture>
       <div class="overlay" aria-hidden="true"></div>
     </a>
+
     <a href="DSC03437.jpg" class="grid-item" data-glightbox="title:Yoane et Marie-Aude" aria-label="Ouvrir l'image 2">
-      <img src="DSC03437.jpg" alt="Portrait du couple marchant sur le rivage" loading="lazy">
+      <picture>
+        <source type="image/webp" srcset="DSC03437-400.webp 400w, DSC03437-800.webp 800w, DSC03437-1600.webp 1600w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw">
+        <source type="image/jpeg" srcset="DSC03437-400.jpg 400w, DSC03437-800.jpg 800w, DSC03437-1600.jpg 1600w">
+        <img src="DSC03437.jpg" alt="Portrait du couple marchant sur le rivage" loading="lazy">
+      </picture>
       <div class="overlay" aria-hidden="true"></div>
     </a>
+
     <a href="DSC03489.jpg" class="grid-item" data-glightbox="title:Yoane et Marie-Aude" aria-label="Ouvrir l'image 3">
-      <img src="DSC03489.jpg" alt="Rires partagés du couple" loading="lazy">
+      <picture>
+        <source type="image/webp" srcset="DSC03489-400.webp 400w, DSC03489-800.webp 800w, DSC03489-1600.webp 1600w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw">
+        <source type="image/jpeg" srcset="DSC03489-400.jpg 400w, DSC03489-800.jpg 800w, DSC03489-1600.jpg 1600w">
+        <img src="DSC03489.jpg" alt="Rires partagés du couple" loading="lazy">
+      </picture>
       <div class="overlay" aria-hidden="true"></div>
     </a>
+
     <a href="placeholder1.jpg" class="grid-item" data-glightbox="title:Photo à ajouter" aria-label="Ouvrir l'image 4">
       <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#fde8f0,#fce0d8);">
         <svg viewBox="0 0 100 120" width="80" height="96" aria-hidden="true"><use href="#frangipane"/></svg>
       </div>
     </a>
+
     <a href="placeholder2.jpg" class="grid-item" data-glightbox="title:Photo à ajouter" aria-label="Ouvrir l'image 5">
       <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#fde0d0,#fce8e0);">
         <svg viewBox="0 0 100 120" width="80" height="96" aria-hidden="true"><use href="#hibiscus"/></svg>
       </div>
     </a>
+
     <a href="placeholder3.jpg" class="grid-item" data-glightbox="title:Photo à ajouter" aria-label="Ouvrir l'image 6">
       <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#fde8f0,#fce0d8);">
         <svg viewBox="0 0 100 120" width="80" height="96" aria-hidden="true"><use href="#fleur-orange"/></svg>
